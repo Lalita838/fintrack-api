@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "dev": "tsx src/server.ts",
+    "start": "node dist/src/server.js",
+    "package:zip": "bash scripts/create-source-zip.sh"
   },
   "dependencies": {
     "better-sqlite3": "^12.4.1"
