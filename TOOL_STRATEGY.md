@@ -13,16 +13,12 @@
 
 ## Scenario Responses
 
-The assessment text received here did not include the scenario descriptions after
-“Scenario Responses.” These are representative responses for common development
-scenarios rather than claims about omitted prompt content.
-
-| Scenario | Copilot feature | Why |
-|---|---|---|
-| Explore an unfamiliar codebase | Copilot Chat with `@workspace` context | Ask for relevant paths and call flows, then inspect cited source files. This is more useful than autocomplete when understanding relationships across files. |
-| Implement a cross-file API feature | Copilot Agent mode with repository instructions | Agent mode can make coordinated changes and run the project checks. Keep the task bounded and inspect every changed file and command result. |
-| Explain or review a focused function | Copilot Chat with `#file` or selected-code context | Supplying exact context limits speculation and supports actionable feedback. Verify every claimed issue against the actual code. |
-| Generate a regression test | Copilot Chat or inline test generation with the implementation file selected | The feature can derive cases from the behavior under test; explicitly request boundaries, authorization, and failure paths. Run tests and inspect assertions for false positives. |
+1. **Understanding a complex 500-line function:** Use Copilot Chat with the function selected and ask for a structured explanation of inputs, branches, side effects, and dependencies before requesting changes. Selected context keeps the answer grounded in the actual code, and the explanation can be checked against the function before editing.
+2. **Adding consistent error handling across eight route handlers:** Use Copilot Agent mode with all relevant route files in workspace context and give it the repository's error-mapping conventions as constraints. Agent mode is suited to coordinated repeated edits; review the diff and run route tests to ensure it did not normalize distinct errors incorrectly.
+3. **Quickly verifying an international phone regex:** Use Copilot Chat to propose representative valid and invalid examples, then run those cases in a tiny test or REPL. Chat is faster than broad agent edits, but regex behavior must be verified by execution against country-code, punctuation, and boundary examples.
+4. **Enforcing checks on every pull request without human intervention:** Use GitHub Actions CI workflows with required status checks and branch protection, not Copilot autocomplete. CI can run lint, tests, and builds on each PR; repository administrators must require those checks before merging.
+5. **Reviewing a teammate's AI-generated authentication module for vulnerabilities:** Use Copilot code review or Copilot Chat in a security-focused review, with the full auth flow and its callers in context. Ask it to trace trust boundaries and authorization decisions, then verify findings with targeted tests and an independent security review rather than accepting suggestions as proof.
+6. **Ensuring Copilot follows project conventions across developers and sessions:** Add and maintain `.github/copilot-instructions.md` with explicit stack, architecture, security, and test rules. Repository-level instructions persist across sessions and are shared with developers using the repository, unlike a one-off chat prompt.
 
 ## Limitations Encountered
 
